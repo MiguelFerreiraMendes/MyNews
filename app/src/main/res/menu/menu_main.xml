@@ -2,23 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.menuexperiments.MainActivity">
+    tools:context="com.example.android.miguel.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Notifications"
+        android:title="About"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/notif_sub"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/help_sub"
+        android:title="Help" />
+
     <item
         android:id="@+id/menu_activity_main_hamburger"
         android:icon="@drawable/hamburger_button"
         android:title="ham"
-        app:showAsAction="ifRoom">
+        app:showAsAction="ifRoom"
+        android:orderInCategory="0">
 
     </item>
     <item
         android:id="@+id/menu_activity_main_search"
         android:icon="@drawable/search_button"
+        android:title="search"
         app:showAsAction="ifRoom"
-        android:title="search">
+        android:orderInCategory="1">
+
     </item>
 </menu>

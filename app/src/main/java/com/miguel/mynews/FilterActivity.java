@@ -17,7 +17,7 @@ public class FilterActivity extends AppCompatActivity {
 
     private void configureToolbar(){
         //Get the toolbar (Serialise)
-        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        Toolbar toolbar = findViewById(R.id.activity_main_toolbar);
         //Set the toolbar
         setSupportActionBar(toolbar);
         // Get a support ActionBar corresponding to this toolbar

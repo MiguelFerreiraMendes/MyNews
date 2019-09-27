@@ -16,11 +16,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Create an instance of the tab layout from the view.
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         // Set the text for each tab.
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label1));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label2));
@@ -30,10 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
-        // This is another example of the adapter pattern.
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-       // final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        //viewPager.setAdapter(adapter);
+        final ViewPager viewPager = findViewById(R.id.pager);
+
         // Setting a listener for clicks.
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -55,24 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Inflates the options menu.
-     *
-     * @param menu_main Menu to inflate
-     * @return Returns true if menu is inflated.
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu_main) {
         getMenuInflater().inflate(R.menu.menu_main, menu_main);
         return true;
     }
 
-    /**
-     * Handles a click on the Settings item in the options menu.
-     *
-     * @param item  Item in options menu that was clicked.
-     * @return Returns true if the item was Settings.
-     */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
