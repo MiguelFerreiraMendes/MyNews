@@ -6,5 +6,8 @@
     <string name="tab_label1">Top Stories</string>
     <string name="tab_label2">Most Popular</string>
     <string name="tab_label3">Business</string>
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="app_name">MyNews</string>
 </resources>
