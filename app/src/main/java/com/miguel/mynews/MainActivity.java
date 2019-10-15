@@ -1,26 +1,33 @@
 package com.miguel.mynews;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.internal.NavigationMenu;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.miguel.mynews.Models.CellInformation;
+import com.miguel.mynews.Utils.CellInformationCalls;
+
+import java.util.List;
+
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CellInformationCalls.Callbacks {
 
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.configureNavigationView();
 
+        this.executeHttpRequestWithRetrofit();
 
 
         // Setting a listener for clicks.
@@ -69,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu_main) {
@@ -130,5 +140,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+
+    @Override
+    public void onResponse(@Nullable List<CellInformation> users) {
+        Toast.makeText(this, "Sucess", Toast.LENGTH_LONG).show();
+        Log.i("test", "blalba" + users);
+    }
+
+    @Override
+    public void onFailure() {
+        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
+
+    }
+    private void executeHttpRequestWithRetrofit(){
+        CellInformationCalls.fetchCellInformationTitle(this, "test");
     }
 }
