@@ -16,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.miguel.mynews.Models.CellInformation;
+import com.miguel.mynews.Adapter.FragmentAdapter;
+import com.miguel.mynews.Models.MostPopular;
 import com.miguel.mynews.Utils.CellInformationCalls;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,26 +58,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.executeHttpRequestWithRetrofit();
 
+        this.configureViewPagerandTabs();
 
-        // Setting a listener for clicks.
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+    }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+    private void configureViewPagerandTabs(){
+        // 1 - Get ViewPager from layout
+        ViewPager pager = findViewById(R.id.pager);
+        // 2 - Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new FragmentAdapter(getSupportFragmentManager()) {
         });
 
+        // 1 - Get TabLayout from layout
+        TabLayout tabs= findViewById(R.id.tab_layout);
+        // 2 - Glue TabLayout and ViewPager together
+        tabs.setupWithViewPager(pager);
+        // 3 - Design purpose. Tabs have the same width
+        tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 
 
@@ -144,9 +145,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void onResponse(@Nullable List<CellInformation> users) {
+    public void onResponse(@Nullable List<MostPopular> mostpopularList) {
         Toast.makeText(this, "Sucess", Toast.LENGTH_LONG).show();
-        Log.i("test", "blalba" + users);
+        Log.i("test", "blalba" + mostpopularList);
+        ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>();
+        mostpopularListArrayList.addAll(mostpopularList);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mostpopularArrayList", mostpopularListArrayList);
+
     }
 
     @Override
@@ -155,6 +162,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     private void executeHttpRequestWithRetrofit(){
-        CellInformationCalls.fetchCellInformationTitle(this, "test");
+        CellInformationCalls.fetchMostPopularList(this);
     }
 }

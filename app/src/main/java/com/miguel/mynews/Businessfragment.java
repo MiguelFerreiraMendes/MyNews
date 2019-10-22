@@ -7,7 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class TabFragment3 extends Fragment {
+public class Businessfragment extends Fragment {
+
+    public static TopStoriesfragment newInstance() {
+        TopStoriesfragment frag1 = new TopStoriesfragment();
+        return(frag1);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

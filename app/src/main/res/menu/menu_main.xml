@@ -5,24 +5,19 @@
     tools:context="com.example.android.miguel.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         android:title="About"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/notif_sub"
-        android:title="Notifications" />
+        android:orderInCategory="0"
+        android:title="Notifications"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/help_sub"
-        android:title="Help" />
-
-    <item
-        android:id="@+id/menu_activity_main_hamburger"
-        android:icon="@drawable/hamburger_button"
-        android:title="ham"
-        app:showAsAction="ifRoom"
-        android:orderInCategory="0">
-
-    </item>
+        android:orderInCategory="1"
+        android:title="Help"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/menu_activity_main_search"
         android:icon="@drawable/search_button"

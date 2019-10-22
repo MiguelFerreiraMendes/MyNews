@@ -4,7 +4,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CellInformation {
+public class MostPopular {
 
     @SerializedName("url")
     @Expose
@@ -17,25 +17,25 @@ public class CellInformation {
     private String subsection;
     @SerializedName("email_count")
     @Expose
-    private Integer emailCount;
+    private Long emailCount;
     @SerializedName("count_type")
     @Expose
     private String countType;
     @SerializedName("column")
     @Expose
-    private Object column;
+    private String column;
     @SerializedName("eta_id")
     @Expose
-    private Integer etaId;
+    private Long etaId;
     @SerializedName("section")
     @Expose
     private String section;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
     @SerializedName("asset_id")
     @Expose
-    private Integer assetId;
+    private Long assetId;
     @SerializedName("nytdsection")
     @Expose
     private String nytdsection;
@@ -60,24 +60,25 @@ public class CellInformation {
     @SerializedName("updated")
     @Expose
     private String updated;
-    @SerializedName("des_facet")
-    @Expose
-    private List<String> desFacet = null;
-    @SerializedName("org_facet")
-    @Expose
-    private List<String> orgFacet = null;
-    @SerializedName("per_facet")
-    @Expose
-    private List<String> perFacet = null;
-    @SerializedName("geo_facet")
-    @Expose
-    private List<String> geoFacet = null;
     @SerializedName("media")
     @Expose
     private List<Medium> media = null;
     @SerializedName("uri")
     @Expose
     private String uri;
+
+
+    public String getGeo() {
+        return geo;
+    }
+
+    public void setGeo(String geo) {
+        this.geo = geo;
+    }
+
+    @SerializedName("geo")
+    @Expose
+    private String geo;
 
     public String getUrl() {
         return url;
@@ -103,11 +104,11 @@ public class CellInformation {
         this.subsection = subsection;
     }
 
-    public Integer getEmailCount() {
+    public Long getEmailCount() {
         return emailCount;
     }
 
-    public void setEmailCount(Integer emailCount) {
+    public void setEmailCount(Long emailCount) {
         this.emailCount = emailCount;
     }
 
@@ -123,15 +124,15 @@ public class CellInformation {
         return column;
     }
 
-    public void setColumn(Object column) {
+    public void setColumn(String column) {
         this.column = column;
     }
 
-    public Integer getEtaId() {
+    public Long getEtaId() {
         return etaId;
     }
 
-    public void setEtaId(Integer etaId) {
+    public void setEtaId(Long etaId) {
         this.etaId = etaId;
     }
 
@@ -143,19 +144,19 @@ public class CellInformation {
         this.section = section;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getAssetId() {
+    public Long getAssetId() {
         return assetId;
     }
 
-    public void setAssetId(Integer assetId) {
+    public void setAssetId(Long assetId) {
         this.assetId = assetId;
     }
 
@@ -223,37 +224,6 @@ public class CellInformation {
         this.updated = updated;
     }
 
-    public List<String> getDesFacet() {
-        return desFacet;
-    }
-
-    public void setDesFacet(List<String> desFacet) {
-        this.desFacet = desFacet;
-    }
-
-    public List<String> getOrgFacet() {
-        return orgFacet;
-    }
-
-    public void setOrgFacet(List<String> orgFacet) {
-        this.orgFacet = orgFacet;
-    }
-
-    public List<String> getPerFacet() {
-        return perFacet;
-    }
-
-    public void setPerFacet(List<String> perFacet) {
-        this.perFacet = perFacet;
-    }
-
-    public List<String> getGeoFacet() {
-        return geoFacet;
-    }
-
-    public void setGeoFacet(List<String> geoFacet) {
-        this.geoFacet = geoFacet;
-    }
 
     public List<Medium> getMedia() {
         return media;

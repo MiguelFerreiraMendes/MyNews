@@ -1,23 +1,22 @@
 package com.miguel.mynews.Utils;
 
-import com.miguel.mynews.Models.CellInformation;
 
-import java.util.List;
+import com.miguel.mynews.Models.MostPopularResponse;
+
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface CellInformationService {
 
-    @GET("svc/{blabla}/v2/emailed/7.json?api-key=SU6O2eY4HxGANHJGjiaEGYnOsXszUzyJ")
-    Call<List<CellInformation>> getTitle(@Path("blabla") String test);
+    @GET("svc/mostpopular/v2/viewed/1.json")
+    Call<MostPopularResponse> getMostPopular(@Query("api-key") String apiKey);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-
 }
