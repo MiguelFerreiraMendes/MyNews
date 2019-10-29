@@ -23,7 +23,7 @@ public class TopStoriesfragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.tab_fragment1, container, false);
+        View result = inflater.inflate(R.layout.topstories, container, false);
         RelativeLayout rootView = result.findViewById(R.id.relativelayout);
         RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
         return result;

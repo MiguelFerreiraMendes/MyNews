@@ -3,6 +3,7 @@ package com.miguel.mynews.Utils;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.miguel.mynews.BuildConfig;
 import com.miguel.mynews.Models.MostPopular;
 import com.miguel.mynews.Models.MostPopularResponse;
 
@@ -15,7 +16,7 @@ import retrofit2.Response;
 
 public class CellInformationCalls {
 
-    public static final String API_KEY = "SU6O2eY4HxGANHJGjiaEGYnOsXszUzyJ";
+    public static final String API_KEY = BuildConfig.ApiKey;
 
     public interface Callbacks {
         void onResponse(@Nullable List<MostPopular> users);

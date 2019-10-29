@@ -17,14 +17,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.miguel.mynews.Adapter.FragmentAdapter;
-import com.miguel.mynews.Models.MostPopular;
-import com.miguel.mynews.Utils.CellInformationCalls;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CellInformationCalls.Callbacks {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private DrawerLayout drawerLayout;
@@ -55,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.configureDrawerLayout();
 
         this.configureNavigationView();
-
-        this.executeHttpRequestWithRetrofit();
 
         this.configureViewPagerandTabs();
 
@@ -143,25 +136,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
-    @Override
-    public void onResponse(@Nullable List<MostPopular> mostpopularList) {
-        Toast.makeText(this, "Sucess", Toast.LENGTH_LONG).show();
-        Log.i("test", "blalba" + mostpopularList);
-        ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>();
-        mostpopularListArrayList.addAll(mostpopularList);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("mostpopularArrayList", mostpopularListArrayList);
-
-    }
-
-    @Override
-    public void onFailure() {
-        Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
-
-    }
-    private void executeHttpRequestWithRetrofit(){
-        CellInformationCalls.fetchMostPopularList(this);
-    }
 }

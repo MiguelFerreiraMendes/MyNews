@@ -53,6 +53,7 @@
         android:layout_height="40dip"
         android:layout_marginTop="20dip"
         android:text="blablablablablablablablablablablablalbablablablabla"
+        android:textColor="@color/colorblack"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton_recycler"
