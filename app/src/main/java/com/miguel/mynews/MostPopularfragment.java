@@ -16,18 +16,16 @@ import android.widget.Toast;
 import com.miguel.mynews.Adapter.InfoCellAdapter;
 import com.miguel.mynews.Models.MostPopular;
 import com.miguel.mynews.Utils.CellInformationCalls;
-import com.miguel.mynews.Utils.MyAsyncTask;
-import com.miguel.mynews.Utils.MyHandlerThread;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MostPopularfragment extends Fragment implements CellInformationCalls.Callbacks, MyAsyncTask.Listeners {
+public class MostPopularfragment extends Fragment implements CellInformationCalls.Callbacks {
 
     public String KEYLIST = "mostpopularArrayList";
-    private MyHandlerThread handlerThread;
     private ProgressBar progressBar;
+    private List<MostPopular> mostpopularlist;
 
     public static MostPopularfragment newInstance() {
         MostPopularfragment frag1 = new MostPopularfragment();
@@ -40,30 +38,31 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
         View result = inflater.inflate(R.layout.mostpopular, container, false);
         RelativeLayout rootView = result.findViewById(R.id.relativelayout);
         this.progressBar = result.findViewById(R.id.mostpop_progress_bar);
-        this.configureHandlerThread();
-        startHandlerThread();
-        executeHttpRequestWithRetrofit();
 
-            Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
+
+        if (mostpopularlist == null) {
+            progressBar.setVisibility(View.VISIBLE);
+            executeHttpRequestWithRetrofit();
+            isRequestFinish(bundle);
+        }
+
+        if (isRequestFinish(bundle)) {
             List<MostPopular> mostpopularlist = (List<MostPopular>) bundle.getSerializable("KEYLIST");
-
-
+            Log.i("list", "list quand on la récup" + mostpopularlist);
             InfoCellAdapter mondapteur;
             RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             mondapteur = new InfoCellAdapter(mostpopularlist);
             recyclerView.setAdapter(mondapteur);
-
+        }
         return result;
-    }
-    private void startAsyncTask() {
-        new MyAsyncTask(this).execute();
     }
 
     @Override
     public void onResponse(@Nullable List<MostPopular> mostpopularList) {
         Toast.makeText(getContext(), "Sucess", Toast.LENGTH_LONG).show();
-        Log.i("test", "blalba" + mostpopularList);
+        Log.i("test", "OnResponse" + mostpopularList);
         ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>(mostpopularList);
 
         Bundle bundle = new Bundle();
@@ -81,36 +80,8 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
         CellInformationCalls.fetchMostPopularList(this);
     }
 
-    private void configureHandlerThread(){
-        handlerThread = new MyHandlerThread("MyAwesomeHanderThread", this.progressBar);
-    }
 
-    private void startHandlerThread(){
-        handlerThread.startHandler();
-    }
-
-    @Override
-    public void onDestroy() {
-        // 3 - QUIT HANDLER THREAD (Free precious resources)
-        handlerThread.quit();
-        super.onDestroy();
-    }
-
-
-    @Override
-    public void onPreExecute() {
-        progressBar.setVisibility(View.VISIBLE);
-
-    }
-
-    @Override
-    public void doInBackground() {
-
-    }
-
-    @Override
-    public void onPostExecute(Long success) {
-        progressBar.setVisibility(View.INVISIBLE);
-
+    public boolean isRequestFinish(Bundle bundle){
+        return (List<MostPopular>) bundle.getSerializable("KEYLIST") != null;
     }
 }

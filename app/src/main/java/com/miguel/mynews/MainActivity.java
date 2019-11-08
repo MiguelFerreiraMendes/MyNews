@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Use PagerAdapter to manage page views in fragments.
         // Each page is represented by its own fragment.
-        final ViewPager viewPager = findViewById(R.id.pager);
 
 
         this.configureDrawerLayout();

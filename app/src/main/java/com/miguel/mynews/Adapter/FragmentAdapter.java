@@ -39,9 +39,9 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0: //Page number 1
-                return "Most Popular";
-            case 1: //Page number 2
                 return "TopStories";
+            case 1: //Page number 2
+                return "Most Popular";
             case 2: //Page number 3
                 return "Business";
             default:
