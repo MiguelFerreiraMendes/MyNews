@@ -26,10 +26,13 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
     public String KEYLIST = "mostpopularArrayList";
     private ProgressBar progressBar;
     private List<MostPopular> mostpopularlist;
+    private View result;
 
     public static MostPopularfragment newInstance() {
         MostPopularfragment frag1 = new MostPopularfragment();
+        Log.i("test", "3");
         return(frag1);
+
     }
 
     @Override
@@ -38,24 +41,26 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
         View result = inflater.inflate(R.layout.mostpopular, container, false);
         RelativeLayout rootView = result.findViewById(R.id.relativelayout);
         this.progressBar = result.findViewById(R.id.mostpop_progress_bar);
+        this.result = result;
 
-        Bundle bundle = new Bundle();
+     //   Bundle bundle = new Bundle();
 
-        if (mostpopularlist == null) {
-            progressBar.setVisibility(View.VISIBLE);
-            executeHttpRequestWithRetrofit();
-            isRequestFinish(bundle);
-        }
+    //   if (mostpopularlist == null) {
+    progressBar.setVisibility(View.VISIBLE);
+    executeHttpRequestWithRetrofit();
+    //       isRequestFinish(bundle);
+    //   }
 
-        if (isRequestFinish(bundle)) {
-            List<MostPopular> mostpopularlist = (List<MostPopular>) bundle.getSerializable("KEYLIST");
-            Log.i("list", "list quand on la récup" + mostpopularlist);
-            InfoCellAdapter mondapteur;
-            RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-            mondapteur = new InfoCellAdapter(mostpopularlist);
-            recyclerView.setAdapter(mondapteur);
-        }
+    //   if (isRequestFinish(bundle)) {
+    //       List<MostPopular> mostpopularlist = (List<MostPopular>) bundle.getSerializable("KEYLIST");
+    //       Log.i("list", "list quand on la récup" + mostpopularlist);
+    //       InfoCellAdapter mondapteur;
+    //       RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
+    //       recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+    //       mondapteur = new InfoCellAdapter(mostpopularlist);
+    //       recyclerView.setAdapter(mondapteur);
+    //   }
+    //
         return result;
     }
 
@@ -67,6 +72,12 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEYLIST, mostpopularListArrayList);
+        InfoCellAdapter mondapteur;
+        RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mondapteur = new InfoCellAdapter(mostpopularlist);
+        recyclerView.setAdapter(mondapteur);
+
 
     }
 
@@ -83,5 +94,15 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
 
     public boolean isRequestFinish(Bundle bundle){
         return (List<MostPopular>) bundle.getSerializable("KEYLIST") != null;
+    }
+
+    public static Long waitForResponse(){
+
+        Long endTime = System.currentTimeMillis() + 1000;
+        while (System.currentTimeMillis() <  endTime) {
+            //Loop
+        }
+
+        return endTime;
     }
 }

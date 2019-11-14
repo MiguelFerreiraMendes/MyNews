@@ -15,8 +15,14 @@ public interface CellInformationService {
     @GET("svc/mostpopular/v2/viewed/1.json")
     Call<MostPopularResponse> getMostPopular(@Query("api-key") String apiKey);
 
+   // @GET("svc/mostpopular/v2/viewed/1.json")
+   // Call<TopStoriesResponse> getTopStories(@Query("api-key") String apiKey);
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
+
+
 }

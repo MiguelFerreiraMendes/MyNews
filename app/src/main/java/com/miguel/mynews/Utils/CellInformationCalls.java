@@ -40,7 +40,7 @@ public class CellInformationCalls {
 
             @Override
             public void onFailure(Call<MostPopularResponse> call, Throwable t) {
-                Log.e("test", "", t);
+                Log.e("test", "throwable", t);
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
 
