@@ -20,6 +20,11 @@ import com.miguel.mynews.Utils.CellInformationCalls;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MostPopularfragment extends Fragment implements CellInformationCalls.Callbacks {
 
@@ -48,6 +53,7 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
     //   if (mostpopularlist == null) {
     progressBar.setVisibility(View.VISIBLE);
     executeHttpRequestWithRetrofit();
+
     //       isRequestFinish(bundle);
     //   }
 
@@ -68,18 +74,19 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
     public void onResponse(@Nullable List<MostPopular> mostpopularList) {
         Toast.makeText(getContext(), "Sucess", Toast.LENGTH_LONG).show();
         Log.i("test", "OnResponse" + mostpopularList);
-        ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>(mostpopularList);
+       // ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>(mostpopularList);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(KEYLIST, mostpopularListArrayList);
-        InfoCellAdapter mondapteur;
-        RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mondapteur = new InfoCellAdapter(mostpopularlist);
-        recyclerView.setAdapter(mondapteur);
+       // Bundle bundle = new Bundle();
+       // bundle.putSerializable(KEYLIST, mostpopularListArrayList);
+       InfoCellAdapter mondapteur;
+       RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
+       recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+       mondapteur = new InfoCellAdapter(mostpopularlist);
+       recyclerView.setAdapter(mondapteur);
 
 
     }
+
 
     @Override
     public void onFailure() {

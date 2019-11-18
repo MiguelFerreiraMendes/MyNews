@@ -10,9 +10,13 @@ import com.miguel.mynews.Models.MostPopularResponse;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CellInformationCalls {
 
@@ -26,8 +30,19 @@ public class CellInformationCalls {
     public static void fetchMostPopularList(Callbacks callbacks){
 
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.addInterceptor(loggingInterceptor);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.nytimes.com/")
+                .client(client.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Log.i("test", "avant");
+        CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
+        Log.i("test", "après");
 
-        CellInformationService cellInformationService = CellInformationService.retrofit.create(CellInformationService.class);
 
         Call<MostPopularResponse> call = cellInformationService.getMostPopular(API_KEY);
         call.enqueue(new Callback<MostPopularResponse>() {

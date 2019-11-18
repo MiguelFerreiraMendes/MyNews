@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.configureDrawerLayout();
 
+
         this.configureNavigationView();
         Log.i("test", "1");
         this.configureViewPagerandTabs();

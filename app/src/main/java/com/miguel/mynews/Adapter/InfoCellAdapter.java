@@ -74,7 +74,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
     void displayCountry(MostPopular mostPopular) {
-        mCountry.setText(mostPopular.getGeo());
+        mCountry.setText(mostPopular.getOrgFacet().get(0));
 
     }
 
