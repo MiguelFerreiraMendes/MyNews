@@ -1,17 +1,31 @@
 package com.miguel.mynews;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.miguel.mynews.Adapter.InfoCellAdapter;
+import com.miguel.mynews.Models.JsonResponse;
+import com.miguel.mynews.Utils.CellInformationCalls;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class TopStoriesfragment extends Fragment {
+public class TopStoriesfragment extends Fragment implements CellInformationCalls.Callbacks {
+
+    public static int JsonId = 1;
+    private ProgressBar progressBar;
+    private RecyclerView mRecyclerView;
 
     public TopStoriesfragment(){}
 
@@ -25,12 +39,46 @@ public class TopStoriesfragment extends Fragment {
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.topstories, container, false);
         RelativeLayout rootView = result.findViewById(R.id.relativelayout);
-        RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
+        this.progressBar = result.findViewById(R.id.topstories_progress_bar);
+        RecyclerView recyclerView = result.findViewById(R.id.recycleview_view_topstories);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        this.mRecyclerView = recyclerView;
+
+        progressBar.setVisibility(View.VISIBLE);
+        executeHttpRequestWithRetrofit();
+
         return result;
 
     }
 
-    RecyclerView mRecyclerView;
-    InfoCellAdapter monadapteur;
 
+    @Override
+    public void onResponse(List<JsonResponse> jsonResponseList) {
+
+        Toast.makeText(getContext(), "sucess TopStories", Toast.LENGTH_LONG).show();
+        Log.i("test", "sucess TopStories");
+
+        updateRecycleView(jsonResponseList, mRecyclerView);
+
+    }
+
+    @Override
+    public void onFailure() {
+
+        Toast.makeText(getContext(), "Failed TopStories", Toast.LENGTH_LONG).show();
+        Log.i("test", "Failed TopStories");
+
+    }
+
+    public void executeHttpRequestWithRetrofit() {
+        CellInformationCalls.fetchMostTopStories(this);
+    }
+
+    public void updateRecycleView (List<JsonResponse> jsonResponseList, RecyclerView recyclerView) {
+
+        InfoCellAdapter mondapteur;
+        mondapteur = new InfoCellAdapter(jsonResponseList, getContext(), JsonId);
+        recyclerView.setAdapter(mondapteur);
+        progressBar.setVisibility(View.INVISIBLE);
+    }
 }

@@ -14,29 +14,25 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.miguel.mynews.Adapter.InfoCellAdapter;
-import com.miguel.mynews.Models.MostPopular;
+import com.miguel.mynews.Models.JsonResponse;
 import com.miguel.mynews.Utils.CellInformationCalls;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MostPopularfragment extends Fragment implements CellInformationCalls.Callbacks {
 
-    public String KEYLIST = "mostpopularArrayList";
+    public static int JsonId = 2;
     private ProgressBar progressBar;
-    private List<MostPopular> mostpopularlist;
     private View result;
+    private RecyclerView mRecyclerView;
+    private List<JsonResponse> test;
 
     public static MostPopularfragment newInstance() {
         MostPopularfragment frag1 = new MostPopularfragment();
         Log.i("test", "3");
-        return(frag1);
+        return (frag1);
 
     }
 
@@ -48,41 +44,21 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
         this.progressBar = result.findViewById(R.id.mostpop_progress_bar);
         this.result = result;
 
-     //   Bundle bundle = new Bundle();
+        progressBar.setVisibility(View.VISIBLE);
+        executeHttpRequestWithRetrofit();
+        RecyclerView recyclerView = result.findViewById(R.id.recycleview_view_mostpop);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        this.mRecyclerView = recyclerView;
 
-    //   if (mostpopularlist == null) {
-    progressBar.setVisibility(View.VISIBLE);
-    executeHttpRequestWithRetrofit();
-
-    //       isRequestFinish(bundle);
-    //   }
-
-    //   if (isRequestFinish(bundle)) {
-    //       List<MostPopular> mostpopularlist = (List<MostPopular>) bundle.getSerializable("KEYLIST");
-    //       Log.i("list", "list quand on la récup" + mostpopularlist);
-    //       InfoCellAdapter mondapteur;
-    //       RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
-    //       recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-    //       mondapteur = new InfoCellAdapter(mostpopularlist);
-    //       recyclerView.setAdapter(mondapteur);
-    //   }
-    //
         return result;
     }
 
     @Override
-    public void onResponse(@Nullable List<MostPopular> mostpopularList) {
+    public void onResponse(@Nullable List<JsonResponse> mostpopularList) {
         Toast.makeText(getContext(), "Sucess", Toast.LENGTH_LONG).show();
-        Log.i("test", "OnResponse" + mostpopularList);
-       // ArrayList<MostPopular> mostpopularListArrayList = new ArrayList<>(mostpopularList);
+        Log.i("test", "sucess most pop");
 
-       // Bundle bundle = new Bundle();
-       // bundle.putSerializable(KEYLIST, mostpopularListArrayList);
-       InfoCellAdapter mondapteur;
-       RecyclerView recyclerView = result.findViewById(R.id.recycleview_view);
-       recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-       mondapteur = new InfoCellAdapter(mostpopularlist);
-       recyclerView.setAdapter(mondapteur);
+        updateRecycleView(mostpopularList, mRecyclerView);
 
 
     }
@@ -90,26 +66,20 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
 
     @Override
     public void onFailure() {
-        Toast.makeText(getContext(),"Failed", Toast.LENGTH_LONG).show();
-        Log.i("test", "failed");
+        Toast.makeText(getContext(), "Failed mostpop", Toast.LENGTH_LONG).show();
+        Log.i("test", "failed mostpop");
 
     }
-    public void executeHttpRequestWithRetrofit(){
+
+    public void executeHttpRequestWithRetrofit() {
         CellInformationCalls.fetchMostPopularList(this);
     }
 
+    public void updateRecycleView (List<JsonResponse> jsonResponseList, RecyclerView recyclerView) {
 
-    public boolean isRequestFinish(Bundle bundle){
-        return (List<MostPopular>) bundle.getSerializable("KEYLIST") != null;
-    }
-
-    public static Long waitForResponse(){
-
-        Long endTime = System.currentTimeMillis() + 1000;
-        while (System.currentTimeMillis() <  endTime) {
-            //Loop
-        }
-
-        return endTime;
+       InfoCellAdapter mondapteur;
+       mondapteur = new InfoCellAdapter(jsonResponseList, getContext(), JsonId);
+       recyclerView.setAdapter(mondapteur);
+       progressBar.setVisibility(View.INVISIBLE);
     }
 }

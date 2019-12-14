@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+    <!-- Importation de notre Toolbar -->
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/activity_main_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dip"
+        android:layout_marginEnd="20dip"
+        android:hint="Search query term"
+        android:layout_marginTop="20dip"
+        android:layout_marginBottom="30dip"
+        android:textColorHighlight="@color/colorPrimary"
+        android:textColor="@color/colorblack"
+        android:textColorHint="@color/colorgrey"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip">
+
+        <CheckBox
+            android:id="@+id/Artcheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Art"
+            android:layout_marginStart="20dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:buttonTint="@color/colorPrimary"/>
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Businesscheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dip"
+            android:text="Business"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/Artcheck"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:textColorHighlight="@color/colorPrimary"
+            android:buttonTint="@color/colorPrimary"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip">
+
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Entrepreneurscheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dip"
+            android:text="Entrepreneurs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:textColorHighlight="@color/colorPrimary"
+            android:buttonTint="@color/colorPrimary"/>
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Politicscheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dip"
+            android:text="Politics"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/Entrepreneurscheck"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:textColorHighlight="@color/colorPrimary"
+            android:buttonTint="@color/colorPrimary"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dip">
+
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Sportscheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dip"
+            android:text="Sports"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:textColorHighlight="@color/colorPrimary"
+            android:buttonTint="@color/colorPrimary"/>
+
+        <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Travelcheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dip"
+            android:text="Travel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/Sportscheck"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorblack"
+            android:textColorHighlight="@color/colorPrimary"
+            android:buttonTint="@color/colorPrimary"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/search_buttonfilter"
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:background="@color/colorPrimary"
+        android:text="Search"
+        android:textColor="@color/colorWhite"
+        android:textColorLink="@color/colorPrimary"
+        android:layout_margin="10dip" />
+
+</LinearLayout>

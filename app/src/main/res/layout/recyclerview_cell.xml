@@ -11,28 +11,21 @@
         android:id="@+id/imageButton_recycler"
         android:layout_width="80dip"
         android:layout_height="80dip"
-        android:layout_margin="10dip"
+        android:layout_margin="5dip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2_recycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:text="France"
-        android:textColor="@color/colorblack"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:text="Europe > "
+        android:textStyle="bold"
+        android:text="Europe "
         android:textColor="@color/colorblack"
+        android:layout_marginStart="10dip"
         app:layout_constraintStart_toEndOf="@+id/imageButton_recycler"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,14 +42,28 @@
 
     <TextView
         android:id="@+id/resume_recycler"
-        android:layout_width="305dip"
+        android:layout_width="290dip"
         android:layout_height="40dip"
         android:layout_marginTop="20dip"
+        android:layout_marginStart="10dip"
         android:text="blablablablablablablablablablablablalbablablablabla"
         android:textColor="@color/colorblack"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton_recycler"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="300dip"
+        android:layout_height="1dp"
+        android:layout_marginStart="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorgrey">
+
+    </LinearLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

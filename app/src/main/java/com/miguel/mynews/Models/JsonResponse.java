@@ -4,7 +4,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MostPopular {
+public class JsonResponse {
 
     @SerializedName("url")
     @Expose
@@ -38,31 +38,36 @@ public class MostPopular {
     private String source;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
     @SerializedName("asset_id")
     @Expose
-    private Integer assetId;
+    private Long assetId;
     @SerializedName("views")
     @Expose
-    private Integer views;
-    @SerializedName("des_facet")
+    private Long views;
+   // @SerializedName("des_facet")
+   // @Expose
+   //private ArrayList desFacet = null;
+   //@SerializedName("org_facet")
+   //@Expose
+   //private ArrayList orgFacet = null;
+   //@SerializedName("per_facet")
+   //@Expose
+   //private ArrayList perFacet = null;
+   //@SerializedName("geo_facet")
+   //@Expose
+  //  private Array geoFacet;
+    @SerializedName("multimedia")
     @Expose
-    private List<String> desFacet = null;
-    @SerializedName("org_facet")
-    @Expose
-    private List<String> orgFacet = null;
-    @SerializedName("per_facet")
-    @Expose
-    private List<String> perFacet = null;
-    @SerializedName("geo_facet")
-    @Expose
-    private String geoFacet;
+    private List<Multimedia> mMultimedia = null;
+
     @SerializedName("media")
     @Expose
-    private List<Medium> media = null;
-    @SerializedName("uri")
-    @Expose
-    private String uri;
+    private List<Multimedia> mMultimediaMostpop = null;
+
+   //@SerializedName("uri")
+   //@Expose
+   //private String uri;
     public String getUrl() {
         return url;
     }
@@ -123,58 +128,74 @@ public class MostPopular {
     public void setSource(String source) {
         this.source = source;
     }
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Integer getAssetId() {
+    public Long getAssetId() {
         return assetId;
     }
-    public void setAssetId(Integer assetId) {
+    public void setAssetId(Long assetId) {
         this.assetId = assetId;
     }
-    public Integer getViews() {
+    public Long getViews() {
         return views;
     }
-    public void setViews(Integer views) {
+    public void setViews(Long views) {
         this.views = views;
     }
-    public List<String> getDesFacet() {
-        return desFacet;
+   // public ArrayList getDesFacet() {
+   //     return desFacet;
+   // }
+   // public void setDesFacet(ArrayList desFacet) {
+   //     this.desFacet = desFacet;
+   // }
+   // public ArrayList getOrgFacet() {
+   //     return orgFacet;
+   // }
+   // public void setOrgFacet(ArrayList orgFacet) {
+   //     this.orgFacet = orgFacet;
+   // }
+   // public ArrayList getPerFacet() {
+   //     return perFacet;
+   // }
+   // public void setPerFacet(ArrayList perFacet) {
+   //     this.perFacet = perFacet;
+   // }
+   // public String getGeoFacet() {
+   //     return geoFacet;
+   // }
+   // public void setGeoFacet(String geoFacet) {
+   //     this.geoFacet = geoFacet;
+   // }
+    public List<Multimedia> getMultimedia() {
+        return mMultimedia;
     }
-    public void setDesFacet(List<String> desFacet) {
-        this.desFacet = desFacet;
+    public void setMultimedia(List<Multimedia> multimedia) {
+        this.mMultimedia = multimedia;
     }
-    public List<String> getOrgFacet() {
-        return orgFacet;
+
+    public List<Multimedia> getMultimediaMostpop() {
+        return mMultimediaMostpop;
     }
-    public void setOrgFacet(List<String> orgFacet) {
-        this.orgFacet = orgFacet;
+
+    public void setMultimediaMostpop(List<Multimedia> multimediaMostpop) {
+        mMultimediaMostpop = multimediaMostpop;
     }
-    public List<String> getPerFacet() {
-        return perFacet;
-    }
-    public void setPerFacet(List<String> perFacet) {
-        this.perFacet = perFacet;
-    }
-    public String getGeoFacet() {
-        return geoFacet;
-    }
-    public void setGeoFacet(String geoFacet) {
-        this.geoFacet = geoFacet;
-    }
-    public List<Medium> getMedia() {
-        return media;
-    }
-    public void setMedia(List<Medium> media) {
-        this.media = media;
-    }
-    public String getUri() {
-        return uri;
-    }
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-    }
+    // public String getUri() {
+   //     return uri;
+   // }
+   // public void setUri(String uri) {
+   //     this.uri = uri;
+   // }
+
+  // public Array getGeoFacet() {
+  //     return geoFacet;
+  // }
+
+  // public void setGeoFacet(Array geoFacet) {
+  //     this.geoFacet = geoFacet;
+  // }
+}

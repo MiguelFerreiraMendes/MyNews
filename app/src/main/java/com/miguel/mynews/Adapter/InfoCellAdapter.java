@@ -1,26 +1,32 @@
 package com.miguel.mynews.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.miguel.mynews.Models.MostPopular;
-import com.miguel.mynews.MostPopularfragment;
+import com.bumptech.glide.Glide;
+import com.miguel.mynews.Models.JsonResponse;
+import com.miguel.mynews.Models.MediaMetadatum;
+import com.miguel.mynews.Models.Multimedia;
 import com.miguel.mynews.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    private List<MostPopular> mMostPopularList;
+    private List<JsonResponse> mJsonResponseList;
+    private Context mContext;
+    private int Jsonindex;
 
-    public InfoCellAdapter(List<MostPopular> mostPopularList){
-        mMostPopularList = mostPopularList;
+    public InfoCellAdapter(List<JsonResponse> jsonResponseList, Context context, int index){
+        mJsonResponseList = jsonResponseList;
+        mContext = context;
+        Jsonindex = index;
     }
 
 
@@ -34,55 +40,72 @@ public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
-        myViewHolder.displayCountry(mMostPopularList.get(position));
+        myViewHolder.displayResume(mJsonResponseList.get(position));
+        myViewHolder.displayDate(mJsonResponseList.get(position));
+        myViewHolder.displaySection(mJsonResponseList.get(position));
+        myViewHolder.displayPicture(mJsonResponseList.get(position), mContext, Jsonindex);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return mMostPopularList.size();
+        return mJsonResponseList.size();
     }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
 
     private ImageButton mPicture;
-    private TextView mContinent;
-    private TextView mCountry;
+    private TextView mSection;
     private TextView mDate;
     private TextView mResume;
-    private WebView mWebView;
 
     public MyViewHolder(View itemView) {
         super(itemView);
 
         mPicture = itemView.findViewById(R.id.imageButton_recycler);
-        mContinent = itemView.findViewById(R.id.textView);
-        mCountry = itemView.findViewById(R.id.textView2_recycler);
+        mSection = itemView.findViewById(R.id.textView);
         mDate = itemView.findViewById(R.id.date_recycler);
         mResume = itemView.findViewById(R.id.resume_recycler);
     }
 
 
-    void displayPicture(){
+   void displayPicture(JsonResponse jsonResponse, Context context, int jsonIndex) {
+
+       if (jsonIndex != 2) {
+           List<Multimedia> multimedia = jsonResponse.getMultimedia();
+           if (multimedia.size() != 0 ) {
+               Log.i("test", "multimedia " + multimedia);
+               String URLPhoto = multimedia.get(0).getUrl();
+               Log.i("test", "url photo" + URLPhoto);
+               Glide.with(context).load(URLPhoto).into(mPicture);
+           }else{
+               mPicture.setVisibility(View.INVISIBLE);
+           }
+
+       }else{
+           List<Multimedia> multimedia = jsonResponse.getMultimediaMostpop();
+           Log.i("test","multimedialist" + multimedia);
+           String URLPhoto = multimedia.get(0).getMediaMetadata().get(0).getUrl();
+           Glide.with(context).load(URLPhoto).into(mPicture);
+       }
+   }
+
+
+    void displaySection(JsonResponse jsonResponse){
+        mSection.setText(jsonResponse.getSection());
 
     }
 
-    void displayContinent(){
+
+    void displayDate(JsonResponse jsonResponse) {
+        mDate.setText(jsonResponse.getPublishedDate().subSequence(0,10));
 
     }
 
-    void displayCountry(MostPopular mostPopular) {
-        mCountry.setText(mostPopular.getOrgFacet().get(0));
-
-    }
-
-    void displayDate() {
-
-    }
-
-    void displayResume () {
+    void displayResume (JsonResponse jsonResponse) {
+        mResume.setText(jsonResponse.getTitle());
 
     }
 

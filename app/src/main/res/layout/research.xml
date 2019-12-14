@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:id="@+id/relativelayout">
 
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
     <ProgressBar
         android:id="@+id/pbProcessing"
         style="?android:attr/progressBarStyleHorizontal"
@@ -19,7 +27,7 @@
         android:background="#FFF">
 
         <ProgressBar
-            android:id="@+id/mostpop_progress_bar"
+            android:id="@+id/research_progress_bar"
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:visibility="gone"/>
@@ -27,7 +35,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview_view_mostpop"
+        android:id="@+id/recycleview_view_research"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
