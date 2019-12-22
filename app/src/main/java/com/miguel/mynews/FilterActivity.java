@@ -1,6 +1,6 @@
 package com.miguel.mynews;
 
-import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +12,15 @@ import android.view.View;
 
 public class FilterActivity extends AppCompatActivity implements Filterfragment.OnButtonClickedListener{
 
+    SharedPreferences mSharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_activity);
         //1 - Configuring Toolbar
         this.configureToolbar();
+        mSharedPreferences = this.getSharedPreferences("checkbox", MODE_PRIVATE);
 
 
 
@@ -37,10 +40,10 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
     @Override
     public void OnButtonClicked(View view) {
         Log.i("test", "test");
-      // FragmentManager fragmentManager = getFragmentManager();
-      // FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-      // fragmentTransaction.replace(R.id.research_layout, Researchfragment);
-      // fragmentTransaction.addToBackStack(null);
-      // fragmentTransaction.commit();
+        Researchfragment fragment = new Researchfragment();
+       FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+       fragmentTransaction.replace(R.id.fragmentfilter, fragment);
+       fragmentTransaction.addToBackStack(null);
+       fragmentTransaction.commit();
     }
 }
