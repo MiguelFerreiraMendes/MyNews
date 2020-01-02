@@ -1,6 +1,9 @@
 package com.miguel.mynews.Adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,9 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.miguel.mynews.Models.JsonResponse;
-import com.miguel.mynews.Models.MediaMetadatum;
-import com.miguel.mynews.Models.Multimedia;
 import com.miguel.mynews.R;
+import com.miguel.mynews.WebViewFragment;
 
 import java.util.List;
 
@@ -60,6 +62,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     private TextView mSection;
     private TextView mDate;
     private TextView mResume;
+    private ConstraintLayout mButton;
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -68,13 +71,14 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mSection = itemView.findViewById(R.id.textView);
         mDate = itemView.findViewById(R.id.date_recycler);
         mResume = itemView.findViewById(R.id.resume_recycler);
+        mButton = itemView.findViewById(R.id.recycleview_cell);
     }
 
 
    void displayPicture(JsonResponse jsonResponse, Context context, int jsonIndex) {
 
        if (jsonIndex != 2) {
-           List<Multimedia> multimedia = jsonResponse.getMultimedia();
+           List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimedia();
            if (multimedia.size() != 0 ) {
                Log.i("test", "multimedia " + multimedia);
                String URLPhoto = multimedia.get(0).getUrl();
@@ -85,7 +89,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
            }
 
        }else{
-           List<Multimedia> multimedia = jsonResponse.getMultimediaMostpop();
+           List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimediaMostpop();
            Log.i("test","multimedialist" + multimedia);
            String URLPhoto = multimedia.get(0).getMediaMetadata().get(0).getUrl();
            Glide.with(context).load(URLPhoto).into(mPicture);
@@ -109,11 +113,20 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+    void displayWebView (JsonResponse jsonResponse) {
+        final String url = jsonResponse.getShort_url();
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   WebViewFragment webViewFragment = new WebViewFragment();
+             //   FragmentManager fragmentManager= getActivity().getFragmentManager();
+             //   FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+             //   fragmentTransaction.replace(R.id.content_main,fragment2,"tag");
+             //   fragmentTransaction.addToBackStack(null);
+             //   fragmentTransaction.commit();
+            }
+        });
 
-
-
-
-
-
+    }
 
 }

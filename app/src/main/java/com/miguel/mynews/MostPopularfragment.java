@@ -25,9 +25,7 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
 
     public static int JsonId = 2;
     private ProgressBar progressBar;
-    private View result;
     private RecyclerView mRecyclerView;
-    private List<JsonResponse> test;
 
     public static MostPopularfragment newInstance() {
         MostPopularfragment frag1 = new MostPopularfragment();
@@ -42,7 +40,6 @@ public class MostPopularfragment extends Fragment implements CellInformationCall
         View result = inflater.inflate(R.layout.mostpopular, container, false);
         RelativeLayout rootView = result.findViewById(R.id.relativelayout);
         this.progressBar = result.findViewById(R.id.mostpop_progress_bar);
-        this.result = result;
 
         progressBar.setVisibility(View.VISIBLE);
         executeHttpRequestWithRetrofit();

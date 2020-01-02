@@ -7,6 +7,7 @@ import com.miguel.mynews.BuildConfig;
 import com.miguel.mynews.Models.BusinessResponse;
 import com.miguel.mynews.Models.JsonResponse;
 import com.miguel.mynews.Models.MostPopularResponse;
+import com.miguel.mynews.Models.ResearchResponse;
 import com.miguel.mynews.Models.TopStoriesResponse;
 
 import java.lang.ref.WeakReference;
@@ -127,4 +128,37 @@ public class CellInformationCalls {
 
         });
     }
+
+  // public static void fetchResearch(Callbacks callbacks, String sectionname, String editText){
+  //     final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
+  //     OkHttpClient.Builder client = new OkHttpClient.Builder();
+  //     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+  //     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+  //     client.addInterceptor(loggingInterceptor);
+  //     Retrofit retrofit = new Retrofit.Builder()
+  //             .baseUrl("https://api.nytimes.com/")
+  //             .client(client.build())
+  //             .addConverterFactory(GsonConverterFactory.create())
+  //             .build();
+  //     CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
+
+
+  //     Call<ResearchResponse> call = cellInformationService.getSearch(API_KEY, sectionname, editText);
+  //     call.enqueue(new Callback<ResearchResponse>() {
+
+  //         @Override
+  //         public void onResponse(Call<ResearchResponse> call, Response<ResearchResponse> response) {
+  //             if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body().results);
+  //             Log.i("tag", "response" + response+ "call" + call);
+
+  //         }
+
+  //         @Override
+  //         public void onFailure(Call<ResearchResponse> call, Throwable t) {
+  //             Log.e("test", "throwable", t);
+  //             if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
+  //         }
+
+  //     });
+    // }
 }

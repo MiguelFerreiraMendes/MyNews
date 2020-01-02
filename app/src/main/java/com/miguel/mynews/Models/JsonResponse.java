@@ -64,10 +64,10 @@ public class JsonResponse {
     @SerializedName("media")
     @Expose
     private List<Multimedia> mMultimediaMostpop = null;
+    @SerializedName("short_url")
+    @Expose
+    private String short_url;
 
-   //@SerializedName("uri")
-   //@Expose
-   //private String uri;
     public String getUrl() {
         return url;
     }
@@ -184,6 +184,14 @@ public class JsonResponse {
     public void setMultimediaMostpop(List<Multimedia> multimediaMostpop) {
         mMultimediaMostpop = multimediaMostpop;
     }
+
+    public String getShort_url() {
+        return short_url;
+    }
+
+    public void setShort_url(String short_url) {
+        this.short_url = short_url;
+    }
     // public String getUri() {
    //     return uri;
    // }
@@ -198,4 +206,85 @@ public class JsonResponse {
   // public void setGeoFacet(Array geoFacet) {
   //     this.geoFacet = geoFacet;
   // }
+
+    public static class MediaMetadatum {
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+       //@SerializedName("format")
+       //@Expose
+       //private String format;
+       //@SerializedName("height")
+       //@Expose
+       //private Integer height;
+       //@SerializedName("width")
+       //@Expose
+        private Integer width;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+       // public String getFormat() {
+       //     return format;
+       // }
+    //
+       // public void setFormat(String format) {
+       //     this.format = format;
+       // }
+    //
+       // public Integer getHeight() {
+       //     return height;
+       // }
+    //
+       // public void setHeight(Integer height) {
+       //     this.height = height;
+       // }
+    //
+       // public Integer getWidth() {
+       //     return width;
+       // }
+
+        public void setWidth(Integer width) {
+            this.width = width;
+        }
+
+    }
+
+    public static class Multimedia {
+
+
+        @SerializedName("media-metadata")
+        @Expose
+        private List<MediaMetadatum> mediaMetadata = null;
+
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+
+        public List<MediaMetadatum> getMediaMetadata() {
+            return mediaMetadata;
+        }
+
+        public void setMediaMetadata(List<MediaMetadatum> mediaMetadata) {
+            this.mediaMetadata = mediaMetadata;
+        }
+
+    }
 }
