@@ -49,7 +49,7 @@ public class CellInformationCallsResearch {
             @Override
             public void onResponse(Call<ResearchResponse> call, Response<ResearchResponse> response) {
                 if (callbacksWeakReference.get() != null)
-                    callbacksWeakReference.get().onResponse(response.body().results);
+                    callbacksWeakReference.get().onResponse(response.body().response);
                 Log.i("tag", "response" + response + "call" + call);
 
             }

@@ -73,7 +73,7 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
         List<JsonResponseResearch.Doc.Multimedium> multimedia = jsonResponse.getMultimedia();
         if (multimedia.size() != 0 ) {
             Log.i("test", "multimedia " + multimedia);
-            String URLPhoto = multimedia.get(0).getUrl();
+            String URLPhoto = multimedia.get(1).getUrl();
             Log.i("test", "url photo" + URLPhoto);
             Glide.with(context).load(URLPhoto).into(mPicture);
         }else{

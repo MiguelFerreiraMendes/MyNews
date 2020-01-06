@@ -1,6 +1,7 @@
 package com.miguel.mynews;
 
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +41,10 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
     @Override
     public void OnButtonClicked(View view) {
         Log.i("test", "test");
-        Researchfragment fragment = new Researchfragment();
+        Researchfragment newfragment = new Researchfragment();
+        Fragment prevfragment = getSupportFragmentManager().findFragmentById(R.id.fragmentfilter);
        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-       fragmentTransaction.replace(R.id.fragmentfilter, fragment);
+       fragmentTransaction.replace(R.id.fragmentfilter, newfragment);
        fragmentTransaction.addToBackStack(null);
        fragmentTransaction.commit();
     }

@@ -9,19 +9,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonResponseResearch {
 
-    @SerializedName("docs")
-    @Expose
-    private List<Doc> docs;
+        @SerializedName("docs")
+        @Expose
+        private List<Doc> docs;
 
-    public List<Doc> getDocs() {
+        public List<Doc> getDocs() {
         return docs;
     }
 
-    public void setDocs(List<Doc> docs) {
+        public void setDocs(List<Doc> docs) {
         this.docs = docs;
     }
 
-    public class Doc {
+        public class Doc {
 
 
         @SerializedName("abstract")
