@@ -50,11 +50,6 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
 
 
 
-
-
-
-
-
     @Override
     public void onResponse(JsonResponseResearch jsonResponseList) {
 

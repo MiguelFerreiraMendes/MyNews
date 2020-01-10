@@ -1,7 +1,6 @@
 package com.miguel.mynews;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,14 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
-import static java.lang.reflect.Modifier.PRIVATE;
 
 public class Filterfragment extends Fragment implements View.OnClickListener {
 

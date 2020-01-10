@@ -5,13 +5,6 @@
     android:id="@+id/research_layout">
 
 
-    <include
-        layout="@layout/toolbar"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
     <ProgressBar
         android:id="@+id/pbProcessing"
         style="?android:attr/progressBarStyleHorizontal"

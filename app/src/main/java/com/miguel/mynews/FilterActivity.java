@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 
 
 public class FilterActivity extends AppCompatActivity implements Filterfragment.OnButtonClickedListener{
@@ -22,6 +23,11 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
         //1 - Configuring Toolbar
         this.configureToolbar();
         mSharedPreferences = this.getSharedPreferences("checkbox", MODE_PRIVATE);
+        Filterfragment filterfragment = new Filterfragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentfilter, filterfragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
 
 
@@ -35,6 +41,7 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
+        ab.setDisplayShowTitleEnabled(false);
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -42,7 +49,7 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
     public void OnButtonClicked(View view) {
         Log.i("test", "test");
         Researchfragment newfragment = new Researchfragment();
-        Fragment prevfragment = getSupportFragmentManager().findFragmentById(R.id.fragmentfilter);
+        //Fragment prevfragment = getSupportFragmentManager().findFragmentById(R.id.fragmentfilter);
        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
        fragmentTransaction.replace(R.id.fragmentfilter, newfragment);
        fragmentTransaction.addToBackStack(null);

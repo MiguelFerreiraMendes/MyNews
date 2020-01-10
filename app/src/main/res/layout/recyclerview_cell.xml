@@ -5,7 +5,8 @@
     android:id="@+id/recycleview_cell"
     android:layout_width="match_parent"
     android:layout_height="100dip"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:clickable="true">
 
     <ImageButton
         android:id="@+id/imageButton_recycler"

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<fragment
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:gravity="center"
+    android:background="#FFF"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentfilter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="com.miguel.mynews.Filterfragment"/>
+
+</LinearLayout>
+

@@ -1,9 +1,8 @@
 package com.miguel.mynews.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.miguel.mynews.Models.JsonResponse;
 import com.miguel.mynews.R;
-import com.miguel.mynews.WebViewFragment;
+import com.miguel.mynews.Researchfragment;
+import com.miguel.mynews.WebViewActivity;
 
 import java.util.List;
 
@@ -41,11 +41,28 @@ public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
+    public void onBindViewHolder(final MyViewHolder myViewHolder, final int position) {
         myViewHolder.displayResume(mJsonResponseList.get(position));
         myViewHolder.displayDate(mJsonResponseList.get(position));
         myViewHolder.displaySection(mJsonResponseList.get(position));
         myViewHolder.displayPicture(mJsonResponseList.get(position), mContext, Jsonindex);
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Jsonindex != 2) {
+                    Log.i("test", "notre lien = " + mJsonResponseList.get(position).getUrl());
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra("url", mJsonResponseList.get(position).getUrl());
+                    mContext.startActivity(intent);
+                } else{
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra("url", mJsonResponseList.get(position).getUrl());
+                    mContext.startActivity(intent);
+                }
+
+
+            }
+        });
 
 
     }
