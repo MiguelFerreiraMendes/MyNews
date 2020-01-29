@@ -29,8 +29,7 @@ public class CellInformationCallsResearch {
 
 
 
-    public static void fetchResearch(CellInformationCallsResearch.Callbacks callbacks, List<String> sectionname, String editText) {
-        final WeakReference<CellInformationCallsResearch.Callbacks> callbacksWeakReference = new WeakReference<CellInformationCallsResearch.Callbacks>(callbacks);
+    public static void fetchResearch(final CellInformationCallsResearch.Callbacks callbacks, List<String> sectionname, String editText) {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -48,8 +47,7 @@ public class CellInformationCallsResearch {
 
             @Override
             public void onResponse(Call<ResearchResponse> call, Response<ResearchResponse> response) {
-                if (callbacksWeakReference.get() != null)
-                    callbacksWeakReference.get().onResponse(response.body().response);
+                callbacks.onResponse(response.body().response);
                 Log.i("tag", "response" + response + "call" + call);
 
             }
@@ -57,7 +55,7 @@ public class CellInformationCallsResearch {
             @Override
             public void onFailure(Call<ResearchResponse> call, Throwable t) {
                 Log.e("test", "throwable", t);
-                if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
+                callbacks.onFailure();
             }
 
         });
