@@ -195,10 +195,10 @@ public class NotificationActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         Log.i("alarm", "start alarm");
 
-        calendar.setTimeInMillis(System.currentTimeMillis() + 1000);
-        //calendar.set(Calendar.HOUR, 16);
-        //calendar.set(Calendar.MINUTE, 5);
-        //calendar.set(Calendar.SECOND, 0);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR, 19);
+        calendar.set(Calendar.MINUTE, 7);
+        calendar.set(Calendar.SECOND, 0);
 
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -208,8 +208,12 @@ public class NotificationActivity extends AppCompatActivity {
         mSharedPreferences.edit()
                 .putString("editText", editText.getText().toString())
                 .apply();
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);
+        try {
+            pendingIntent.send(this, 0, new Intent());
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
 
     }
