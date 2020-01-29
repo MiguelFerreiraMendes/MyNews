@@ -70,13 +70,6 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
     private TextView mSection;
     private TextView mDate;
     private TextView mResume;
-    private ConstraintLayout mLayout;
-    private View.OnClickListener mCallback;
-
-    public interface RecyclerviewOnClickListener{
-        void OnLayoutClicked(int position);
-    }
-
 
 
     public MyViewHolderResearch(View itemView) {
@@ -86,7 +79,6 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
         mSection = itemView.findViewById(R.id.textView);
         mDate = itemView.findViewById(R.id.date_recycler);
         mResume = itemView.findViewById(R.id.resume_recycler);
-        mLayout = itemView.findViewById(R.id.recycleview_cell);
     }
 
 

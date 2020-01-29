@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import com.miguel.mynews.R;
 import com.miguel.mynews.Utils.CellInformationCallsResearch;
 
 import java.util.ArrayList;
@@ -82,6 +83,7 @@ public class AlertReceiver extends BroadcastReceiver implements CellInformationC
                 .setContentText("Number of articles found : " + size + ".")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .build();
         notificationManager.notify(1, notification);
 
