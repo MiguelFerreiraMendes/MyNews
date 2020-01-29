@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ViewPager mPager;
 
 
     @Override
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pager.setAdapter(new FragmentAdapter(getSupportFragmentManager()) {
         });
 
+        mPager = pager;
+
         // 1 - Get TabLayout from layout
         TabLayout tabs= findViewById(R.id.tab_layout);
         // 2 - Glue TabLayout and ViewPager together
@@ -86,7 +89,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.notif_sub) {
+
+            Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+            this.startActivity(intent);
+
             return true;
         }
         if (id == R.id.menu_activity_main_search){
@@ -121,13 +128,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id){
-            case R.id.activity_main_drawer_news :
+            case R.id.activity_main_drawer_search :
+                Intent myIntent = new Intent(MainActivity.this, FilterActivity.class);
+                this.startActivity(myIntent);
                 break;
-            case R.id.activity_main_drawer_profile:
+            case R.id.activity_main_drawer_TopStories:
+                mPager.setCurrentItem(0);
                 break;
-            case R.id.activity_main_drawer_settings:
+            case R.id.activity_main_drawer_Mostpop:
+                mPager.setCurrentItem(1);
                 break;
-            default:
+            case R.id.activity_main_drawer_Business:
+                mPager.setCurrentItem(2);
+                break;
+                default:
                 break;
         }
 

@@ -6,12 +6,15 @@
     android:layout_height="176dip"
     android:background="#B2B9E1"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/navHeaderSearch"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="50dip"
         app:srcCompat="@drawable/search_button" />
 
 </LinearLayout>

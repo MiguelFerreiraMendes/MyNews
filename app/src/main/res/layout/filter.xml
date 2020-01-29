@@ -98,37 +98,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dip"
+            android:buttonTint="@color/colorPrimary"
             android:text="Sports"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/colorblack"
             android:textColorHighlight="@color/colorPrimary"
-            android:buttonTint="@color/colorPrimary"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/Travelcheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="170dip"
+            android:buttonTint="@color/colorPrimary"
             android:text="Travel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/Sportscheck"
-            app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/colorblack"
             android:textColorHighlight="@color/colorPrimary"
-            android:buttonTint="@color/colorPrimary"/>
+            app:layout_constraintStart_toStartOf="@+id/Sportscheck"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
-    <Button
-        android:id="@+id/search_buttonfilter"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:background="@color/colorPrimary"
-        android:text="Search"
-        android:textColor="@color/colorWhite"
-        android:textColorLink="@color/colorPrimary"
-        android:layout_margin="10dip" />
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/search_buttonfilter"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_margin="10dip"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Search"
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <TextView
+            android:id="@+id/textnotif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/enable_notifications_once_per_day"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/switchnotif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:minWidth="56dip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/textnotif"
+            app:layout_constraintStart_toEndOf="@+id/textnotif"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
 </LinearLayout>

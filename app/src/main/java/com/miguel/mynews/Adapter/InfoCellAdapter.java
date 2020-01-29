@@ -41,22 +41,23 @@ public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder myViewHolder, final int position) {
+    public void onBindViewHolder(final MyViewHolder myViewHolder, int position) {
         myViewHolder.displayResume(mJsonResponseList.get(position));
         myViewHolder.displayDate(mJsonResponseList.get(position));
         myViewHolder.displaySection(mJsonResponseList.get(position));
         myViewHolder.displayPicture(mJsonResponseList.get(position), mContext, Jsonindex);
+
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Jsonindex != 2) {
-                    Log.i("test", "notre lien = " + mJsonResponseList.get(position).getUrl());
+                    Log.i("test", "notre lien = " + mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
                     Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra("url", mJsonResponseList.get(position).getUrl());
+                    intent.putExtra("url", mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
                     mContext.startActivity(intent);
                 } else{
                     Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra("url", mJsonResponseList.get(position).getUrl());
+                    intent.putExtra("url", mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
                     mContext.startActivity(intent);
                 }
 
@@ -79,7 +80,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     private TextView mSection;
     private TextView mDate;
     private TextView mResume;
-    private ConstraintLayout mButton;
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -88,7 +88,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mSection = itemView.findViewById(R.id.textView);
         mDate = itemView.findViewById(R.id.date_recycler);
         mResume = itemView.findViewById(R.id.resume_recycler);
-        mButton = itemView.findViewById(R.id.recycleview_cell);
     }
 
 
@@ -96,13 +95,18 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
        if (jsonIndex != 2) {
            List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimedia();
-           if (multimedia.size() != 0 ) {
-               Log.i("test", "multimedia " + multimedia);
-               String URLPhoto = multimedia.get(0).getUrl();
-               Log.i("test", "url photo" + URLPhoto);
-               Glide.with(context).load(URLPhoto).into(mPicture);
-           }else{
-               mPicture.setVisibility(View.INVISIBLE);
+
+           try {
+               if (multimedia.size() != 0) {
+                   Log.i("test", "multimedia " + multimedia);
+                   String URLPhoto = multimedia.get(0).getUrl();
+                   Log.i("test", "url photo" + URLPhoto);
+                   Glide.with(context).load(URLPhoto).into(mPicture);
+               } else {
+                   mPicture.setVisibility(View.INVISIBLE);
+               }
+           }catch (NullPointerException e){
+                    mPicture.setVisibility(View.INVISIBLE);
            }
 
        }else{
@@ -127,22 +131,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
     void displayResume (JsonResponse jsonResponse) {
         mResume.setText(jsonResponse.getTitle());
-
-    }
-
-    void displayWebView (JsonResponse jsonResponse) {
-        final String url = jsonResponse.getShort_url();
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             //   WebViewFragment webViewFragment = new WebViewFragment();
-             //   FragmentManager fragmentManager= getActivity().getFragmentManager();
-             //   FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-             //   fragmentTransaction.replace(R.id.content_main,fragment2,"tag");
-             //   fragmentTransaction.addToBackStack(null);
-             //   fragmentTransaction.commit();
-            }
-        });
 
     }
 

@@ -8,9 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:color">@color/colorWhite</item>
         <item name="editTextColor">@color/colorblack</item>
-
-
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:colorBackground">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorblack</item>
     </style>
+
 
 
 

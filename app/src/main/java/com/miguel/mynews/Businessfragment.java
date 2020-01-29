@@ -55,6 +55,7 @@ public class Businessfragment extends Fragment implements CellInformationCalls.C
 
         Toast.makeText(getContext(), "sucess Business", Toast.LENGTH_LONG).show();
         Log.i("test", "sucess Business");
+        Log.i("business", "" + jsonResponseList);
 
         updateRecycleView(jsonResponseList, mRecyclerView);
 

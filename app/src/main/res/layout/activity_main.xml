@@ -35,7 +35,6 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorWhite"
         android:layout_below="@id/tab_layout"/>
 
     </LinearLayout>
@@ -45,9 +44,10 @@
         android:id="@+id/activity_main_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:itemTextColor="@color/colorblack"
+        app:itemIconTint="@color/colorblack"
         app:headerLayout="@layout/activity_main_nav_header"
         app:menu="@menu/activity_main_menu_drawer" />
 

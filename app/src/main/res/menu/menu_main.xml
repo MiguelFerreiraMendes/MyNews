@@ -7,7 +7,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="2"
         android:title="About"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/notif_sub"
         android:orderInCategory="0"

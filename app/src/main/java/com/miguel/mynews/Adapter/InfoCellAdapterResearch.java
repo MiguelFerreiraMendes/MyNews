@@ -95,9 +95,9 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
         List<JsonResponseResearch.Doc.Multimedium> multimedia = jsonResponse.getMultimedia();
         if (multimedia.size() != 0 ) {
             Log.i("test", "multimedia " + multimedia);
-            String URLPhoto = multimedia.get(1).getUrl();
+            String URLPhoto = multimedia.get(0).getUrl();
             Log.i("test", "url photo" + URLPhoto);
-            String FinalURLPhoto = "https://api.nytimes.com/" + URLPhoto;
+            String FinalURLPhoto = "https://nytimes.com/" + URLPhoto;
             Log.i("photo", "" + FinalURLPhoto + URLPhoto);
             Glide.with(context).load(FinalURLPhoto).into(mPicture);
         }else{
@@ -118,18 +118,6 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
     void displayResume (JsonResponseResearch.Doc jsonResponse) {
         mResume.setText(jsonResponse.getLeadParagraph());
 
-    }
-
-    void displayWebView (final JsonResponseResearch.Doc jsonResponse){
-        mLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              // String url = jsonResponse.getWebUrl();
-              // Intent webviewIntent = new Intent(FilterActivity.class, WebViewActivity.class);
-              // startActivity(webviewIntent);
-
-            }
-        });
     }
 
 }
