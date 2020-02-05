@@ -27,8 +27,6 @@ public class TopStoriesfragment extends Fragment implements CellInformationCalls
     private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
 
-    public TopStoriesfragment(){}
-
     public static TopStoriesfragment newInstance() {
         TopStoriesfragment frag1 = new TopStoriesfragment();
         return(frag1);
@@ -43,31 +41,20 @@ public class TopStoriesfragment extends Fragment implements CellInformationCalls
         RecyclerView recyclerView = result.findViewById(R.id.recycleview_view_topstories);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         this.mRecyclerView = recyclerView;
-
         progressBar.setVisibility(View.VISIBLE);
         executeHttpRequestWithRetrofit();
-
         return result;
-
     }
-
 
     @Override
     public void onResponse(List<JsonResponse> jsonResponseList) {
-
-        Toast.makeText(getContext(), "sucess TopStories", Toast.LENGTH_LONG).show();
-        Log.i("test", "sucess TopStories");
-
         updateRecycleView(jsonResponseList, mRecyclerView);
-
     }
 
     @Override
     public void onFailure() {
-
         Toast.makeText(getContext(), "Failed TopStories", Toast.LENGTH_LONG).show();
         Log.i("test", "Failed TopStories");
-
     }
 
     public void executeHttpRequestWithRetrofit() {
@@ -75,9 +62,8 @@ public class TopStoriesfragment extends Fragment implements CellInformationCalls
     }
 
     public void updateRecycleView (List<JsonResponse> jsonResponseList, RecyclerView recyclerView) {
-
         InfoCellAdapter mondapteur;
-        mondapteur = new InfoCellAdapter(jsonResponseList, getContext(), JsonId);
+        mondapteur = new InfoCellAdapter(jsonResponseList, JsonId);
         recyclerView.setAdapter(mondapteur);
         progressBar.setVisibility(View.INVISIBLE);
     }

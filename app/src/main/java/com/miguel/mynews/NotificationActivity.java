@@ -45,7 +45,6 @@ public class NotificationActivity extends AppCompatActivity {
                 .putInt("CaseCheck", 0)
                 .apply();
 
-
         ArtcheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -56,13 +55,10 @@ public class NotificationActivity extends AppCompatActivity {
                             .putString("Art", "Artcheck")
                             .putInt("CaseCheck", i + 1)
                             .apply();
-                    Log.i("Art", "aprés check" + mSharedPreferences.getString("Art", "defValue"));
                 } else {
-                    Log.i("Art", "avant uncheck" + mSharedPreferences.getString("Art", "defValue"));
                     mSharedPreferences.edit()
                             .putString("Art", "")
                             .apply();
-                    Log.i("Art", "après uncheck" + mSharedPreferences.getString("Art", "defValue"));
                 }
             }
         });
@@ -157,9 +153,6 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         final Switch sw = findViewById(R.id.switchnotif);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -177,29 +170,16 @@ public class NotificationActivity extends AppCompatActivity {
                 }
             }
         });
-
         createNotificationChannels();
-
-
-
-
-
-
-
-
     }
-
 
     private void startAlarm(SharedPreferences mSharedPreferences) {
 
         Calendar calendar = Calendar.getInstance();
-        Log.i("alarm", "start alarm");
-
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR, 19);
-        calendar.set(Calendar.MINUTE, 7);
+        calendar.set(Calendar.HOUR, 17);
+        calendar.set(Calendar.MINUTE, 28);
         calendar.set(Calendar.SECOND, 0);
-
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
@@ -208,14 +188,7 @@ public class NotificationActivity extends AppCompatActivity {
         mSharedPreferences.edit()
                 .putString("editText", editText.getText().toString())
                 .apply();
-        try {
-            pendingIntent.send(this, 0, new Intent());
-        } catch (PendingIntent.CanceledException e) {
-            e.printStackTrace();
-        }
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-
     }
 
     private void createNotificationChannels() {
@@ -224,17 +197,13 @@ public class NotificationActivity extends AppCompatActivity {
             chanel1.setDescription("Channel 1");
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(chanel1);
-
-
         }
     }
 
     private void stopAlarm(){
-        Log.i("alarm", "stop alarm");
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1253, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
-
     }
 }

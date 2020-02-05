@@ -27,29 +27,21 @@ public class CellInformationCallsResearch {
         void onFailure();
     }
 
+    public static void fetchResearch(final CellInformationCallsResearch.Callbacks callbacks, List<String> sectionname, String editText, int date) {
 
-
-    public static void fetchResearch(final CellInformationCallsResearch.Callbacks callbacks, List<String> sectionname, String editText) {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.nytimes.com/")
                 .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
-
-
-        Call<ResearchResponse> call = cellInformationService.getSearch(API_KEY, sectionname, editText);
+        Call<ResearchResponse> call = cellInformationService.getSearch(API_KEY, sectionname, editText, date);
         call.enqueue(new Callback<ResearchResponse>() {
 
             @Override
             public void onResponse(Call<ResearchResponse> call, Response<ResearchResponse> response) {
                 callbacks.onResponse(response.body().response);
-                Log.i("tag", "response" + response + "call" + call);
-
             }
 
             @Override
@@ -57,6 +49,5 @@ public class CellInformationCallsResearch {
                 Log.e("test", "throwable", t);
                 callbacks.onFailure();
             }
-
         });
     }}

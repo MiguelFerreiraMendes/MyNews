@@ -21,11 +21,9 @@ import com.miguel.mynews.Adapter.FragmentAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ViewPager mPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,40 +31,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Create an instance of the tab layout from the view.
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-        // Set the text for each tab.
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label1));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label2));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label3));
-        // Set the tabs to fill the entire layout.
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        // Use PagerAdapter to manage page views in fragments.
-        // Each page is represented by its own fragment.
-
         this.configureDrawerLayout();
-
-
         this.configureNavigationView();
-        Log.i("test", "1");
         this.configureViewPagerandTabs();
-
-
-
-
     }
 
     private void configureViewPagerandTabs(){
         // 1 - Get ViewPager from layout
         ViewPager pager = findViewById(R.id.pager);
         // 2 - Set Adapter PageAdapter and glue it together
-        pager.setAdapter(new FragmentAdapter(getSupportFragmentManager()) {
+        pager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), this) {
         });
-
         mPager = pager;
-
         // 1 - Get TabLayout from layout
         TabLayout tabs= findViewById(R.id.tab_layout);
         // 2 - Glue TabLayout and ViewPager together
@@ -75,35 +54,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu_main) {
         getMenuInflater().inflate(R.menu.menu_main, menu_main);
         return true;
     }
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.notif_sub) {
 
+        if (id == R.id.notif_sub) {
             Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
             this.startActivity(intent);
-
-            return true;
         }
+
         if (id == R.id.menu_activity_main_search){
             Intent myIntent = new Intent(MainActivity.this, FilterActivity.class);
             this.startActivity(myIntent);
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     // Configure NavigationView
     private void configureNavigationView(){
@@ -120,13 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         // Handle Navigation Item Click
         int id = item.getItemId();
-
         switch (id){
             case R.id.activity_main_drawer_search :
                 Intent myIntent = new Intent(MainActivity.this, FilterActivity.class);
@@ -144,10 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 default:
                 break;
         }
-
         this.drawerLayout.closeDrawer(GravityCompat.START);
-
         return true;
     }
-
 }

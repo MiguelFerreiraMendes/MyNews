@@ -24,6 +24,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CellInformationCalls {
 
     public static final String API_KEY = BuildConfig.ApiKey;
+    private static CellInformationService callInformationService = null;
+
+    public static CellInformationService getCallInformationService(){
+        if(callInformationService == null){
+            OkHttpClient.Builder client = new OkHttpClient.Builder();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://api.nytimes.com/")
+                    .client(client.build())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            callInformationService = retrofit.create(CellInformationService.class);
+        }
+        return  callInformationService;
+    }
 
     public interface Callbacks {
         void onResponse(@Nullable List<JsonResponse> users);
@@ -33,26 +47,13 @@ public class CellInformationCalls {
     public static void fetchMostPopularList(Callbacks callbacks){
 
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client.addInterceptor(loggingInterceptor);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.nytimes.com/")
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
 
-
-        Call<MostPopularResponse> call = cellInformationService.getMostPopular(API_KEY);
+        Call<MostPopularResponse> call = getCallInformationService().getMostPopular(API_KEY);
         call.enqueue(new Callback<MostPopularResponse>() {
 
             @Override
             public void onResponse(Call<MostPopularResponse> call, Response<MostPopularResponse> response) {
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body().results);
-                Log.i("tag", "response" + response+ "call" + call);
-
             }
 
             @Override
@@ -60,32 +61,18 @@ public class CellInformationCalls {
                 Log.e("test", "throwable", t);
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
-
         });
     }
 
     public static void fetchMostTopStories(Callbacks callbacks){
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client.addInterceptor(loggingInterceptor);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.nytimes.com/")
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
 
-
-        Call<TopStoriesResponse> call = cellInformationService.getTopStories(API_KEY);
+        Call<TopStoriesResponse> call = getCallInformationService().getTopStories(API_KEY);
         call.enqueue(new Callback<TopStoriesResponse>() {
 
             @Override
             public void onResponse(Call<TopStoriesResponse> call, Response<TopStoriesResponse> response) {
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body().results);
-                Log.i("tag", "response" + response+ "call" + call);
-
             }
 
             @Override
@@ -93,31 +80,17 @@ public class CellInformationCalls {
                 Log.e("test", "throwable", t);
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
-
         });
     }
     public static void fetchBusiness(Callbacks callbacks){
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client.addInterceptor(loggingInterceptor);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.nytimes.com/")
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
 
-
-        Call<BusinessResponse> call = cellInformationService.getBusiness(API_KEY);
+        Call<BusinessResponse> call = getCallInformationService().getBusiness(API_KEY);
         call.enqueue(new Callback<BusinessResponse>() {
 
             @Override
             public void onResponse(Call<BusinessResponse> call, Response<BusinessResponse> response) {
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body().results);
-                Log.i("tag", "response" + response+ "call" + call);
-
             }
 
             @Override
@@ -125,40 +98,6 @@ public class CellInformationCalls {
                 Log.e("test", "throwable", t);
                 if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
             }
-
         });
     }
-
-  // public static void fetchResearch(Callbacks callbacks, String sectionname, String editText){
-  //     final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
-  //     OkHttpClient.Builder client = new OkHttpClient.Builder();
-  //     HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-  //     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-  //     client.addInterceptor(loggingInterceptor);
-  //     Retrofit retrofit = new Retrofit.Builder()
-  //             .baseUrl("https://api.nytimes.com/")
-  //             .client(client.build())
-  //             .addConverterFactory(GsonConverterFactory.create())
-  //             .build();
-  //     CellInformationService cellInformationService = retrofit.create(CellInformationService.class);
-
-
-  //     Call<ResearchResponse> call = cellInformationService.getSearch(API_KEY, sectionname, editText);
-  //     call.enqueue(new Callback<ResearchResponse>() {
-
-  //         @Override
-  //         public void onResponse(Call<ResearchResponse> call, Response<ResearchResponse> response) {
-  //             if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onResponse(response.body().results);
-  //             Log.i("tag", "response" + response+ "call" + call);
-
-  //         }
-
-  //         @Override
-  //         public void onFailure(Call<ResearchResponse> call, Throwable t) {
-  //             Log.e("test", "throwable", t);
-  //             if (callbacksWeakReference.get() != null) callbacksWeakReference.get().onFailure();
-  //         }
-
-  //     });
-    // }
 }

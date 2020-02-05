@@ -16,7 +16,9 @@ import android.util.Log;
 import com.miguel.mynews.R;
 import com.miguel.mynews.Utils.CellInformationCallsResearch;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
@@ -27,17 +29,17 @@ public class AlertReceiver extends BroadcastReceiver implements CellInformationC
     private NotificationManager notificationManager;
     private Context mContext;
 
-
-
     @Override
     public void onReceive(Context context, Intent intent) {
-
 
         SharedPreferences mSharedPreferences = context.getSharedPreferences("checkbox", MODE_PRIVATE);
         List<String> tagList = new ArrayList<>();
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String format = simpleDateFormat.format(new Date().getTime());
+        int date = Integer.valueOf(format);
+
         String editText = mSharedPreferences.getString("editText", "");
-        Log.i("test", editText);
 
         if (mSharedPreferences.getString("Art", "defValue").equals("Artcheck")) {
             tagList.add("\"Art\"");
@@ -62,17 +64,13 @@ public class AlertReceiver extends BroadcastReceiver implements CellInformationC
 
         notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        CellInformationCallsResearch.fetchResearch(this, tagList, editText);
-
-
-
+        CellInformationCallsResearch.fetchResearch(this, tagList, editText, date);
     }
 
     @Override
     public void onResponse(@Nullable JsonResponseResearch users) {
         int sizeNotifications = users.getDocs().size();
         updateNotification(sizeNotifications);
-
     }
 
     @Override
@@ -91,7 +89,6 @@ public class AlertReceiver extends BroadcastReceiver implements CellInformationC
             // or other notification behaviors after this
             notificationManager.createNotificationChannel(channel);
         }
-
         Notification notification = new NotificationCompat.Builder(mContext, "mychannel")
                 .setContentTitle("List of articles found with your tags")
                 .setContentText("Number of articles found : " + size + ".")
@@ -100,6 +97,5 @@ public class AlertReceiver extends BroadcastReceiver implements CellInformationC
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .build();
         notificationManager.notify(1, notification);
-
     }
 }

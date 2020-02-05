@@ -1,5 +1,6 @@
 package com.miguel.mynews.Adapter;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -7,15 +8,16 @@ import android.util.Log;
 
 import com.miguel.mynews.Businessfragment;
 import com.miguel.mynews.MostPopularfragment;
+import com.miguel.mynews.R;
 import com.miguel.mynews.TopStoriesfragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
 
+    private Context mContext;
 
-
-    public FragmentAdapter(FragmentManager fm) {
+    public FragmentAdapter(FragmentManager fm, Context context) {
         super(fm);
-        Log.i("test", "2");
+        mContext = context;
     }
 
     @Override
@@ -41,11 +43,11 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0: //Page number 1
-                return "TopStories";
+                return mContext.getResources().getString(R.string.tab_label1);
             case 1: //Page number 2
-                return "Most Popular";
+                return mContext.getResources().getString(R.string.tab_label2);
             case 2: //Page number 3
-                return "Business";
+                return mContext.getResources().getString(R.string.tab_label3);
             default:
                 return null;
         }

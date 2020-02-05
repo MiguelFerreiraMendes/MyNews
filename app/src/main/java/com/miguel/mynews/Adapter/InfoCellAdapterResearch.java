@@ -23,14 +23,10 @@ import java.util.List;
 public class InfoCellAdapterResearch extends RecyclerView.Adapter<MyViewHolderResearch> {
 
     private List<JsonResponseResearch.Doc> jsonResponse;
-    private Context mContext;
 
-    public InfoCellAdapterResearch(JsonResponseResearch jsonResponseList, Context context){
-        mContext = context;
-        Log.i("json", "json juste avant de récup les docs " + jsonResponseList);
+    public InfoCellAdapterResearch(JsonResponseResearch jsonResponseList){
         jsonResponse = jsonResponseList.getDocs();
     }
-
 
     @Override
     public MyViewHolderResearch onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -41,21 +37,18 @@ public class InfoCellAdapterResearch extends RecyclerView.Adapter<MyViewHolderRe
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolderResearch myViewHolder, final int position) {
+    public void onBindViewHolder(final MyViewHolderResearch myViewHolder, final int position) {
         myViewHolder.displayResume(jsonResponse.get(position));
         myViewHolder.displayDate(jsonResponse.get(position));
         myViewHolder.displaySection(jsonResponse.get(position));
-        myViewHolder.displayPicture(jsonResponse.get(position), mContext);
+        myViewHolder.displayPicture(jsonResponse.get(position), myViewHolder.itemView.getContext());
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("test", "notre lien = " + jsonResponse.get(position).getWebUrl());
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(myViewHolder.itemView.getContext(), WebViewActivity.class);
                 intent.putExtra("url", jsonResponse.get(position).getWebUrl());
-                mContext.startActivity(intent);
+                myViewHolder.itemView.getContext().startActivity(intent);
             }});
-
-
     }
 
     @Override
@@ -71,7 +64,6 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
     private TextView mDate;
     private TextView mResume;
 
-
     public MyViewHolderResearch(View itemView) {
         super(itemView);
 
@@ -81,16 +73,12 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
         mResume = itemView.findViewById(R.id.resume_recycler);
     }
 
-
     void displayPicture(JsonResponseResearch.Doc jsonResponse, Context context) {
 
         List<JsonResponseResearch.Doc.Multimedium> multimedia = jsonResponse.getMultimedia();
         if (multimedia.size() != 0 ) {
-            Log.i("test", "multimedia " + multimedia);
             String URLPhoto = multimedia.get(0).getUrl();
-            Log.i("test", "url photo" + URLPhoto);
             String FinalURLPhoto = "https://nytimes.com/" + URLPhoto;
-            Log.i("photo", "" + FinalURLPhoto + URLPhoto);
             Glide.with(context).load(FinalURLPhoto).into(mPicture);
         }else{
             mPicture.setVisibility(View.INVISIBLE);
@@ -99,17 +87,13 @@ class MyViewHolderResearch extends RecyclerView.ViewHolder {
 
     void displaySection(JsonResponseResearch.Doc jsonResponse){
         mSection.setText(jsonResponse.getSectionName());
-
     }
 
     void displayDate(JsonResponseResearch.Doc jsonResponse) {
         mDate.setText(jsonResponse.getPubDate().subSequence(0,10));
-
     }
 
     void displayResume (JsonResponseResearch.Doc jsonResponse) {
         mResume.setText(jsonResponse.getLeadParagraph());
-
     }
-
 }

@@ -22,15 +22,12 @@ import java.util.List;
 public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<JsonResponse> mJsonResponseList;
-    private Context mContext;
     private int Jsonindex;
 
-    public InfoCellAdapter(List<JsonResponse> jsonResponseList, Context context, int index){
+    public InfoCellAdapter(List<JsonResponse> jsonResponseList, int index){
         mJsonResponseList = jsonResponseList;
-        mContext = context;
         Jsonindex = index;
     }
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -45,27 +42,16 @@ public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
         myViewHolder.displayResume(mJsonResponseList.get(position));
         myViewHolder.displayDate(mJsonResponseList.get(position));
         myViewHolder.displaySection(mJsonResponseList.get(position));
-        myViewHolder.displayPicture(mJsonResponseList.get(position), mContext, Jsonindex);
+        myViewHolder.displayPicture(mJsonResponseList.get(position), myViewHolder.itemView.getContext(), Jsonindex);
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Jsonindex != 2) {
-                    Log.i("test", "notre lien = " + mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    Intent intent = new Intent(myViewHolder.itemView.getContext(), WebViewActivity.class);
                     intent.putExtra("url", mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
-                    mContext.startActivity(intent);
-                } else{
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra("url", mJsonResponseList.get(myViewHolder.getAdapterPosition()).getUrl());
-                    mContext.startActivity(intent);
-                }
-
-
+                    myViewHolder.itemView.getContext().startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -90,7 +76,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mResume = itemView.findViewById(R.id.resume_recycler);
     }
 
-
    void displayPicture(JsonResponse jsonResponse, Context context, int jsonIndex) {
 
        if (jsonIndex != 2) {
@@ -98,9 +83,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
            try {
                if (multimedia.size() != 0) {
-                   Log.i("test", "multimedia " + multimedia);
                    String URLPhoto = multimedia.get(0).getUrl();
-                   Log.i("test", "url photo" + URLPhoto);
                    Glide.with(context).load(URLPhoto).into(mPicture);
                } else {
                    mPicture.setVisibility(View.INVISIBLE);
@@ -111,18 +94,15 @@ class MyViewHolder extends RecyclerView.ViewHolder {
 
        }else{
            List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimediaMostpop();
-           Log.i("test","multimedialist" + multimedia);
            String URLPhoto = multimedia.get(0).getMediaMetadata().get(0).getUrl();
            Glide.with(context).load(URLPhoto).into(mPicture);
        }
    }
 
-
     void displaySection(JsonResponse jsonResponse){
         mSection.setText(jsonResponse.getSection());
 
     }
-
 
     void displayDate(JsonResponse jsonResponse) {
         mDate.setText(jsonResponse.getPublishedDate().subSequence(0,10));
@@ -133,5 +113,4 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mResume.setText(jsonResponse.getTitle());
 
     }
-
 }

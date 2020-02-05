@@ -26,11 +26,7 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
         Filterfragment filterfragment = new Filterfragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentfilter, filterfragment);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
-
-
     }
 
     private void configureToolbar(){
@@ -47,7 +43,6 @@ public class FilterActivity extends AppCompatActivity implements Filterfragment.
 
     @Override
     public void OnButtonClicked(View view) {
-        Log.i("test", "test");
         Researchfragment newfragment = new Researchfragment();
         //Fragment prevfragment = getSupportFragmentManager().findFragmentById(R.id.fragmentfilter);
        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

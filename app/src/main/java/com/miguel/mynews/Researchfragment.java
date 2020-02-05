@@ -20,7 +20,9 @@ import com.miguel.mynews.Models.JsonResponseResearch;
 import com.miguel.mynews.Utils.CellInformationCalls;
 import com.miguel.mynews.Utils.CellInformationCallsResearch;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,6 +31,7 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
 
     private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
+    private int date;
 
 
     @Override
@@ -41,6 +44,9 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
         RecyclerView recyclerView = result.findViewById(R.id.recycleview_view_research);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         this.mRecyclerView = recyclerView;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String format = simpleDateFormat.format(new Date().getTime());
+        date = Integer.valueOf(format);
         researchFilterAndLaunchRetrofit();
 
         return result;
@@ -53,9 +59,6 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
     @Override
     public void onResponse(JsonResponseResearch jsonResponseList) {
 
-        Toast.makeText(getContext(), "sucess research", Toast.LENGTH_LONG).show();
-        Log.i("json", "json quand on le récup dans le on response" + jsonResponseList);
-        Log.i("test", "sucess research");
 
         updateRecycleView(jsonResponseList, mRecyclerView);
 
@@ -70,15 +73,14 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
     }
 
     public void executeHttpRequestWithRetrofit(List<String> sectionname, String editText) {
-        CellInformationCallsResearch.fetchResearch(this, sectionname, editText);
+        CellInformationCallsResearch.fetchResearch(this, sectionname, editText, date);
     }
 
     public void updateRecycleView (JsonResponseResearch jsonResponseList, RecyclerView recyclerView) {
 
-        Log.i("json", "json quand on le passe a update recycleview" + jsonResponseList);
 
         InfoCellAdapterResearch mondapteur;
-        mondapteur = new InfoCellAdapterResearch(jsonResponseList, getContext());
+        mondapteur = new InfoCellAdapterResearch(jsonResponseList);
         recyclerView.setAdapter(mondapteur);
         progressBar.setVisibility(View.INVISIBLE);
     }
@@ -89,7 +91,7 @@ public class Researchfragment extends Fragment implements CellInformationCallsRe
         List<String> tagList = new ArrayList<>();
 
         String editText = mSharedPreferences.getString("editText", "");
-        Log.i("editText","editText quand on le récup dans le second fragment" + editText);
+
         if (mSharedPreferences.getString("Art", "defValue").equals("Artcheck")){
             tagList.add("\"Art\"");
         }
