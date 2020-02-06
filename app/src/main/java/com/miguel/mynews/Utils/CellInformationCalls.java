@@ -28,7 +28,10 @@ public class CellInformationCalls {
 
     public static CellInformationService getCallInformationService(){
         if(callInformationService == null){
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient.Builder client = new OkHttpClient.Builder();
+            client.addInterceptor(loggingInterceptor);
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://api.nytimes.com/")
                     .client(client.build())
