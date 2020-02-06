@@ -23,7 +23,6 @@ import java.util.List;
 
 public class TopStoriesfragment extends Fragment implements CellInformationCalls.Callbacks {
 
-    public static int JsonId = 1;
     private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
 
@@ -63,7 +62,7 @@ public class TopStoriesfragment extends Fragment implements CellInformationCalls
 
     public void updateRecycleView (List<JsonResponse> jsonResponseList, RecyclerView recyclerView) {
         InfoCellAdapter mondapteur;
-        mondapteur = new InfoCellAdapter(jsonResponseList, JsonId);
+        mondapteur = new InfoCellAdapter(jsonResponseList);
         recyclerView.setAdapter(mondapteur);
         progressBar.setVisibility(View.INVISIBLE);
     }

@@ -22,11 +22,9 @@ import java.util.List;
 public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<JsonResponse> mJsonResponseList;
-    private int Jsonindex;
 
-    public InfoCellAdapter(List<JsonResponse> jsonResponseList, int index){
+    public InfoCellAdapter(List<JsonResponse> jsonResponseList){
         mJsonResponseList = jsonResponseList;
-        Jsonindex = index;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class InfoCellAdapter extends RecyclerView.Adapter<MyViewHolder> {
         myViewHolder.displayResume(mJsonResponseList.get(position));
         myViewHolder.displayDate(mJsonResponseList.get(position));
         myViewHolder.displaySection(mJsonResponseList.get(position));
-        myViewHolder.displayPicture(mJsonResponseList.get(position), myViewHolder.itemView.getContext(), Jsonindex);
+        myViewHolder.displayPicture(mJsonResponseList.get(position), myViewHolder.itemView.getContext());
 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,27 +74,11 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mResume = itemView.findViewById(R.id.resume_recycler);
     }
 
-   void displayPicture(JsonResponse jsonResponse, Context context, int jsonIndex) {
+   void displayPicture(JsonResponse jsonResponse, Context context) {
 
-       if (jsonIndex != 2) {
-           List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimedia();
-
-           try {
-               if (multimedia.size() != 0) {
-                   String URLPhoto = multimedia.get(0).getUrl();
-                   Glide.with(context).load(URLPhoto).into(mPicture);
-               } else {
-                   mPicture.setVisibility(View.INVISIBLE);
-               }
-           }catch (NullPointerException e){
-                    mPicture.setVisibility(View.INVISIBLE);
-           }
-
-       }else{
-           List<JsonResponse.Multimedia> multimedia = jsonResponse.getMultimediaMostpop();
-           String URLPhoto = multimedia.get(0).getMediaMetadata().get(0).getUrl();
+           String URLPhoto = jsonResponse.getThumbnailUrl();
            Glide.with(context).load(URLPhoto).into(mPicture);
-       }
+
    }
 
     void displaySection(JsonResponse jsonResponse){

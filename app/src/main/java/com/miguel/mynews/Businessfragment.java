@@ -18,7 +18,6 @@ import java.util.List;
 
 public class Businessfragment extends Fragment implements CellInformationCalls.Callbacks {
 
-    public static int JsonId = 3;
     private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
 
@@ -59,7 +58,7 @@ public class Businessfragment extends Fragment implements CellInformationCalls.C
 
     public void updateRecycleView (List<JsonResponse> jsonResponseList, RecyclerView recyclerView) {
         InfoCellAdapter mondapteur;
-        mondapteur = new InfoCellAdapter(jsonResponseList, JsonId);
+        mondapteur = new InfoCellAdapter(jsonResponseList);
         recyclerView.setAdapter(mondapteur);
         progressBar.setVisibility(View.INVISIBLE);
     }

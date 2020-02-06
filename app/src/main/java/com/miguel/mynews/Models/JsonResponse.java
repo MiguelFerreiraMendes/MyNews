@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonResponse {
 
+
+
     @SerializedName("url")
     @Expose
     private String url;
@@ -45,18 +47,7 @@ public class JsonResponse {
     @SerializedName("views")
     @Expose
     private Long views;
-   // @SerializedName("des_facet")
-   // @Expose
-   //private ArrayList desFacet = null;
-   //@SerializedName("org_facet")
-   //@Expose
-   //private ArrayList orgFacet = null;
-   //@SerializedName("per_facet")
-   //@Expose
-   //private ArrayList perFacet = null;
-   //@SerializedName("geo_facet")
-   //@Expose
-  //  private Array geoFacet;
+
     @SerializedName("multimedia")
     @Expose
     private List<Multimedia> mMultimedia = null;
@@ -146,30 +137,7 @@ public class JsonResponse {
     public void setViews(Long views) {
         this.views = views;
     }
-   // public ArrayList getDesFacet() {
-   //     return desFacet;
-   // }
-   // public void setDesFacet(ArrayList desFacet) {
-   //     this.desFacet = desFacet;
-   // }
-   // public ArrayList getOrgFacet() {
-   //     return orgFacet;
-   // }
-   // public void setOrgFacet(ArrayList orgFacet) {
-   //     this.orgFacet = orgFacet;
-   // }
-   // public ArrayList getPerFacet() {
-   //     return perFacet;
-   // }
-   // public void setPerFacet(ArrayList perFacet) {
-   //     this.perFacet = perFacet;
-   // }
-   // public String getGeoFacet() {
-   //     return geoFacet;
-   // }
-   // public void setGeoFacet(String geoFacet) {
-   //     this.geoFacet = geoFacet;
-   // }
+
     public List<Multimedia> getMultimedia() {
         return mMultimedia;
     }
@@ -192,34 +160,25 @@ public class JsonResponse {
     public void setShort_url(String short_url) {
         this.short_url = short_url;
     }
-    // public String getUri() {
-   //     return uri;
-   // }
-   // public void setUri(String uri) {
-   //     this.uri = uri;
-   // }
 
-  // public Array getGeoFacet() {
-  //     return geoFacet;
-  // }
-
-  // public void setGeoFacet(Array geoFacet) {
-  //     this.geoFacet = geoFacet;
-  // }
+    public String getThumbnailUrl(){
+        if(mMultimedia != null && mMultimedia.size() > 0){
+            return mMultimedia.get(0).getUrl();
+        }
+        else if(mMultimediaMostpop != null && mMultimediaMostpop.size() > 0
+                && mMultimediaMostpop.get(0).getMediaMetadata() != null
+                && mMultimediaMostpop.get(0).getMediaMetadata().size() > 0){
+            return mMultimediaMostpop.get(0).getMediaMetadata().get(0).getUrl();
+        }
+        return null;
+    }
 
     public static class MediaMetadatum {
 
         @SerializedName("url")
         @Expose
         private String url;
-       //@SerializedName("format")
-       //@Expose
-       //private String format;
-       //@SerializedName("height")
-       //@Expose
-       //private Integer height;
-       //@SerializedName("width")
-       //@Expose
+
         private Integer width;
 
         public String getUrl() {
